@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Interactive Image Gallery</title>
+    <style>
+      body {
+        padding: 25px;
+        font-family: Arial, sans-serif;
+      }
+      .title {
+        color: black;
+        margin-bottom: 20px;
+      }
+     
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 15px;
+      }
+      .gallery-img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        cursor: pointer;
+        border-radius: 8px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .gallery-img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+      }
+      .lightbox {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        background: rgba(0,0,0,0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 100;
+        cursor: pointer;
+      }
+      .lightbox-img {
+        max-width: 90%;
+        max-height: 80%;
+        border-radius: 10px;
+        box-shadow: 0 0 25px rgba(255,255,255,0.7);
+      }
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="title">Interactive Image Gallery</h1>
+    <div class="gallery">
+      <img src="https://uploads.onecompiler.io/44b62kcqu/44caxckq3/WhatsApp%20Image%202026-02-01%20at%203.10.50%20PM1.jpeg" alt="Image 1" class="gallery-img" />
+      <img src="https://uploads.onecompiler.io/44b62kcqu/44caxckq3/Screenshot_20211121_134329.jpg" alt="Image 2" class="gallery-img" />
+      <img src="https://uploads.onecompiler.io/44b62kcqu/44caxckq3/Screenshot_20211004_092532.jpg" alt="Image 3" class="gallery-img" />
+      <img src="https://uploads.onecompiler.io/44b62kcqu/44caxckq3/IMG-20220518-WA0033.jpg" alt="Image 4" class="gallery-img" />
+      <img src="https://uploads.onecompiler.io/44b62kcqu/44caxckq3/WhatsApp%20Image%202026-02-01%20at%203.13.53%20PM2.jpeg" alt="Image 5" class="gallery-img" />
+      <img src="https://uploads.onecompiler.io/44b62kcqu/44caxckq3/WhatsApp%20Image%202026-02-01%20at%203.10.50%20PM.jpeg" alt="Image 6" class="gallery-img" />
+    </div>
+
+    <div id="lightbox" class="lightbox hidden">
+      <img class="lightbox-img" src="" alt="" />
+    </div>
+
+    <script>
+      const galleryImages = document.querySelectorAll('.gallery-img');
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.querySelector('.lightbox-img');
+
+      galleryImages.forEach(img => {
+        img.addEventListener('click', () => {
+          lightbox.classList.remove('hidden');
+          lightboxImg.src = img.src;
+          lightboxImg.alt = img.alt;
+        });
+      });
+
+      lightbox.addEventListener('click', e => {
+        if (e.target === lightbox) {
+          lightbox.classList.add('hidden');
+        }
+      });
+    </script>
+  </body>
+</html>
